@@ -16,6 +16,7 @@ public class StringListImpl implements StringList {
 
     @Override
     public String add(String item) {
+        checkItemByNull(item);
         increaseArraySize();
         array[arraySize] = item;
 
@@ -24,6 +25,8 @@ public class StringListImpl implements StringList {
 
     @Override
     public String add(int index, String item) {
+        checkItemByNull(item);
+
         if (index > arraySize) {
             throw new MyIndexOutOfBoundsException("Введен слишком большой индекс");
         }
@@ -38,6 +41,12 @@ public class StringListImpl implements StringList {
         return array[index];
     }
 
+    private void checkItemByNull(String item) {
+        if (item == null) {
+            throw new NullPointerException("Значение не должно быть равно null");
+        }
+    }
+
     private void increaseArraySize() {
         if (arraySize == (array.length - 1)) {
             int newSize = array.length * 2 + 1;
@@ -47,6 +56,7 @@ public class StringListImpl implements StringList {
 
     @Override
     public String set(int index, String item) {
+        checkItemByNull(item);
         isFoundElement(index);
         array[index] = item;
         return array[index];
@@ -54,6 +64,7 @@ public class StringListImpl implements StringList {
 
     @Override
     public String remove(String item) {
+        checkItemByNull(item);
         int index = indexOf(item);
         if (index == -1) {
             throw new MyIndexOutOfBoundsException("Элемент не найден");
@@ -77,11 +88,15 @@ public class StringListImpl implements StringList {
 
     @Override
     public boolean contains(String item) {
+        checkItemByNull(item);
+
         return indexOf(item) != -1;
     }
 
     @Override
     public int indexOf(String item) {
+        checkItemByNull(item);
+
         for (int i = 0; i < arraySize; i++) {
             if (array[i].equals(item)) {
                 return i;
@@ -92,6 +107,7 @@ public class StringListImpl implements StringList {
 
     @Override
     public int lastIndexOf(String item) {
+        checkItemByNull(item);
         for (int i = arraySize-1; i >= 0; i--) {
             if (array[i].equals(item)) {
                 return i;

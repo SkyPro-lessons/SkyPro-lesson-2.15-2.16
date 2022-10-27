@@ -46,6 +46,17 @@ public class StringListImplTest {
     }
 
     @Test
+    public void addValueNegative() {
+        assertThatExceptionOfType(NullPointerException.class)
+                .isThrownBy(() -> stringList.add(null))
+                .withMessage("Значение не должно быть равно null");
+
+        assertThatExceptionOfType(NullPointerException.class)
+                .isThrownBy(() -> stringList.add(1, null))
+                .withMessage("Значение не должно быть равно null");
+    }
+
+    @Test
     public void setValuePositive() {
         stringList.set(3, VALUE_1);
 
@@ -55,6 +66,10 @@ public class StringListImplTest {
 
     @Test
     public void setValueNegative() {
+        assertThatExceptionOfType(NullPointerException.class)
+                .isThrownBy(() -> stringList.set(1, null))
+                .withMessage("Значение не должно быть равно null");
+
         assertThatExceptionOfType(MyIndexOutOfBoundsException.class)
                 .isThrownBy(() -> stringList.set(5, VALUE_1))
                 .withMessage("Такого элемента не существует");
@@ -80,6 +95,10 @@ public class StringListImplTest {
 
     @Test
     public void removeValueByItemNegative() {
+        assertThatExceptionOfType(NullPointerException.class)
+                .isThrownBy(() -> stringList.remove(null))
+                .withMessage("Значение не должно быть равно null");
+
         assertThatExceptionOfType(MyIndexOutOfBoundsException.class)
                 .isThrownBy(() -> stringList.remove(VALUE_NON_ELEMENT));
     }
@@ -91,6 +110,17 @@ public class StringListImplTest {
 
         assertThat(stringList.contains(VALUE_NON_ELEMENT))
                 .isFalse();
+
+        assertThatExceptionOfType(NullPointerException.class)
+                .isThrownBy(() -> stringList.contains(null))
+                .withMessage("Значение не должно быть равно null");
+    }
+
+    @Test
+    public void indexOfNegative() {
+        assertThatExceptionOfType(NullPointerException.class)
+                .isThrownBy(() -> stringList.indexOf(null))
+                .withMessage("Значение не должно быть равно null");
     }
 
     @Test
@@ -100,6 +130,10 @@ public class StringListImplTest {
 
         assertThat(stringList.lastIndexOf(VALUE_NON_ELEMENT))
                 .isEqualTo(-1);
+
+        assertThatExceptionOfType(NullPointerException.class)
+                .isThrownBy(() -> stringList.lastIndexOf(null))
+                .withMessage("Значение не должно быть равно null");
     }
 
     @Test
