@@ -16,7 +16,7 @@ public class StringListImpl implements StringList {
 
     @Override
     public String add(String item) {
-        checkItemByNull(item);
+        validateItem(item);
         increaseArraySize();
         array[arraySize] = item;
 
@@ -25,10 +25,10 @@ public class StringListImpl implements StringList {
 
     @Override
     public String add(int index, String item) {
-        checkItemByNull(item);
+        validateItem(item);
 
-        if (index > arraySize) {
-            throw new MyIndexOutOfBoundsException("Введен слишком большой индекс");
+        if (index < 0 || index > arraySize) {
+            throw new MyIndexOutOfBoundsException("Введен некорректный индекс");
         }
         increaseArraySize();
 
@@ -41,7 +41,7 @@ public class StringListImpl implements StringList {
         return array[index];
     }
 
-    private void checkItemByNull(String item) {
+    private void validateItem(String item) {
         if (item == null) {
             throw new NullPointerException("Значение не должно быть равно null");
         }
@@ -56,15 +56,15 @@ public class StringListImpl implements StringList {
 
     @Override
     public String set(int index, String item) {
-        checkItemByNull(item);
-        isFoundElement(index);
+        validateItem(item);
+        validateIndex(index);
         array[index] = item;
         return array[index];
     }
 
     @Override
     public String remove(String item) {
-        checkItemByNull(item);
+        validateItem(item);
         int index = indexOf(item);
         if (index == -1) {
             throw new MyIndexOutOfBoundsException("Элемент не найден");
@@ -75,7 +75,7 @@ public class StringListImpl implements StringList {
 
     @Override
     public String remove(int index) {
-        isFoundElement(index);
+        validateIndex(index);
         String element = array[index];
 
         if (arraySize - index >= 0) {
@@ -88,15 +88,11 @@ public class StringListImpl implements StringList {
 
     @Override
     public boolean contains(String item) {
-        checkItemByNull(item);
-
         return indexOf(item) != -1;
     }
 
     @Override
     public int indexOf(String item) {
-        checkItemByNull(item);
-
         for (int i = 0; i < arraySize; i++) {
             if (array[i].equals(item)) {
                 return i;
@@ -107,7 +103,6 @@ public class StringListImpl implements StringList {
 
     @Override
     public int lastIndexOf(String item) {
-        checkItemByNull(item);
         for (int i = arraySize-1; i >= 0; i--) {
             if (array[i].equals(item)) {
                 return i;
@@ -118,7 +113,7 @@ public class StringListImpl implements StringList {
 
     @Override
     public String get(int index) {
-        isFoundElement(index);
+        validateIndex(index);
         return array[index];
     }
 
@@ -153,12 +148,13 @@ public class StringListImpl implements StringList {
 
     @Override
     public String[] toArray() {
-        String[] result = new String[arraySize];
-        System.arraycopy(array, 0, result, 0, arraySize);
+        /*String[] result = new String[arraySize];
+        System.arraycopy(array, 0, result, 0, arraySize);*/
+        String[] result = Arrays.copyOf(array, arraySize);
         return result;
     }
 
-    private void isFoundElement(int index) {
+    private void validateIndex(int index) {
         try {
             if (array[index] == null || index >= arraySize) {
                 throw new MyIndexOutOfBoundsException("Такого элемента не существует");

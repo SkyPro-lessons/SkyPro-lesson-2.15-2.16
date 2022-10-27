@@ -9,5 +9,5 @@ public class StringListImplConstants {
     public static final String VALUE_NULL = null;
     public static final String VALUE_NON_ELEMENT = "Не элемент";
 
-    public static final String ERROR_MESSAGE_BIG_INDEX = "Введен слишком большой индекс";
+    public static final String ERROR_MESSAGE_NOT_CORRECT_INDEX = "Введен некорректный индекс";
 }

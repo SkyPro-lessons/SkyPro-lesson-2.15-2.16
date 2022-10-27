@@ -42,7 +42,7 @@ public class StringListImplTest {
     public void addValueByIndexNegative() {
         assertThatExceptionOfType(MyIndexOutOfBoundsException.class)
                 .isThrownBy(() -> stringList.add(8, VALUE_5))
-                .withMessage(ERROR_MESSAGE_BIG_INDEX);
+                .withMessage(ERROR_MESSAGE_NOT_CORRECT_INDEX);
     }
 
     @Test
@@ -110,17 +110,6 @@ public class StringListImplTest {
 
         assertThat(stringList.contains(VALUE_NON_ELEMENT))
                 .isFalse();
-
-        assertThatExceptionOfType(NullPointerException.class)
-                .isThrownBy(() -> stringList.contains(null))
-                .withMessage("Значение не должно быть равно null");
-    }
-
-    @Test
-    public void indexOfNegative() {
-        assertThatExceptionOfType(NullPointerException.class)
-                .isThrownBy(() -> stringList.indexOf(null))
-                .withMessage("Значение не должно быть равно null");
     }
 
     @Test
@@ -130,10 +119,6 @@ public class StringListImplTest {
 
         assertThat(stringList.lastIndexOf(VALUE_NON_ELEMENT))
                 .isEqualTo(-1);
-
-        assertThatExceptionOfType(NullPointerException.class)
-                .isThrownBy(() -> stringList.lastIndexOf(null))
-                .withMessage("Значение не должно быть равно null");
     }
 
     @Test
