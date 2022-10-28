@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>site.telion</groupId>
-    <artifactId>SkyPro-lesson-2-14-myarraylist</artifactId>
+    <artifactId>SkyPro-lesson-2-15-fastsort</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SkyPro-lesson-2.14-myarraylist</name>
-    <description>SkyPro-lesson-2.14-myarraylist</description>
+    <name>SkyPro-lesson-2.15-fastsort</name>
+    <description>SkyPro-lesson-2.15-fastsort</description>
     <properties>
         <java.version>11</java.version>
     </properties>
