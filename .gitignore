@@ -31,7 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
-/SkyPro-lesson-2.14-myarraylist.iml
+*.iml
 /mvnw.cmd
 /mvnw
 /.mvn/
