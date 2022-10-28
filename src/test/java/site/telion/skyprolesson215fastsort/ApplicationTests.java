@@ -1,4 +1,4 @@
-package site.telion.skyprolesson214myarraylist;
+package site.telion.skyprolesson215fastsort;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,6 +1,6 @@
-package site.telion.skyprolesson214myarraylist.service;
+package site.telion.skyprolesson215fastsort.service;
 
-import site.telion.skyprolesson214myarraylist.exception.MyIndexOutOfBoundsException;
+import site.telion.skyprolesson215fastsort.exception.MyIndexOutOfBoundsException;
 
 import java.util.Arrays;
 

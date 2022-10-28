@@ -1,12 +1,12 @@
-package site.telion.skyprolesson214myarraylist.service;
+package site.telion.skyprolesson215fastsort.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import site.telion.skyprolesson214myarraylist.exception.MyIndexOutOfBoundsException;
+import site.telion.skyprolesson215fastsort.exception.MyIndexOutOfBoundsException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static site.telion.skyprolesson214myarraylist.service.StringListImplConstants.*;
+import static site.telion.skyprolesson215fastsort.service.StringListImplConstants.*;
 
 
 public class StringListImplTest {

@@ -1,4 +1,4 @@
-package site.telion.skyprolesson214myarraylist.service;
+package site.telion.skyprolesson215fastsort.service;
 
 public interface StringList {
 

@@ -1,4 +1,4 @@
-package site.telion.skyprolesson214myarraylist.exception;
+package site.telion.skyprolesson215fastsort.exception;
 
 public class MyIndexOutOfBoundsException extends RuntimeException {
 

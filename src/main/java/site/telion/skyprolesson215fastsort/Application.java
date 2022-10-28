@@ -1,4 +1,4 @@
-package site.telion.skyprolesson214myarraylist;
+package site.telion.skyprolesson215fastsort;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
