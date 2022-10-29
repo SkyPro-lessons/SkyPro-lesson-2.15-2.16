@@ -89,7 +89,10 @@ public class IntegerListImpl implements IntegerList {
 
     @Override
     public boolean contains(Integer item) {
-        return indexOf(item) != -1;
+        array = selectionSort(getArray());
+        System.out.println(Arrays.toString(array));
+        return !binarySearch(array, item).equals(-1);
+        //return indexOf(item) != -1;
     }
 
     @Override
@@ -116,6 +119,12 @@ public class IntegerListImpl implements IntegerList {
     public Integer get(int index) {
         validateIndex(index);
         return array[index];
+    }
+
+    private Integer[] getArray() {
+        Integer[] result = new Integer[arraySize];
+        System.arraycopy(array, 0, result, 0, arraySize);
+        return result;
     }
 
     @Override
@@ -166,7 +175,7 @@ public class IntegerListImpl implements IntegerList {
     private Integer[] bubbleSort(Integer[] array) {
         for (int i = 0; i < array.length - 1; i++) {
             for (int j = i + 1; j < array.length; j++) {
-                int temp = 0;
+                int temp;
                 if (array[j] < array[i]) {
                     temp = array[i];
                     array[i] = array[j];
@@ -183,7 +192,7 @@ public class IntegerListImpl implements IntegerList {
         for (int i = 0; i < array.length - 1; i++) {
             int min = array[i];
             int indexMin = i;
-            int temp = 0;
+            int temp;
             for (int j = i + 1; j < array.length; j++) {
                 if (array[j] < min) {
                     min = array[j];
@@ -202,7 +211,7 @@ public class IntegerListImpl implements IntegerList {
     // вставками
     private Integer[] insertionSort(Integer[] array) {
         for (int i = 1; i < array.length; i++) {
-            int temp = 0;
+            int temp;
             int currIndex = i;
             for (int j = i - 1; j >= 0; j--) {
                 if (array[currIndex] < array[j]) {
@@ -221,7 +230,7 @@ public class IntegerListImpl implements IntegerList {
     }
 
     public void sortTest() {
-        Integer[] array = new Integer[100_000];
+        Integer[] array = new Integer[100_00];
         Random random = new Random();
 
         for (int i = 0; i < array.length; i++) {
@@ -239,6 +248,34 @@ public class IntegerListImpl implements IntegerList {
         start = System.currentTimeMillis();
         this.insertionSort(array.clone());
         System.out.println("Insertion sort: " + ((System.currentTimeMillis() - start) / 1000.0) + " s");
+
+    }
+
+    private Integer binarySearch(Integer[] array, Integer value) {
+        int low = 0;
+        int high = array.length - 1;
+        int middle;
+        if (value > array[high] || value < array[low]) {
+            return -1;
+        }
+        while (low <= high) {
+            middle = (low + high) / 2;
+
+
+            if (array[middle].equals(value)) {
+                System.out.println(array[middle] + ": " + middle);
+                return middle;
+            }
+
+            if (value > array[middle]) {
+                low = middle + 1;
+            } else {
+                high = middle - 1;
+            }
+
+            System.out.println("value = " + value + ", low = " + array[low] + ", middle = " + array[middle] + ", high = " + array[high]);
+        }
+        return -1;
     }
 
 }
