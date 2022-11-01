@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import site.telion.skyprolesson215fastsort.exception.MyIndexOutOfBoundsException;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static site.telion.skyprolesson215fastsort.service.IntegerListImplConstants.*;
@@ -104,10 +106,20 @@ public class IntegerListImplTest {
 
     @Test
     public void containsValueInArray() {
-        assertThat(integerList.contains(VALUE_3))
+        integerList.add(0, VALUE_84);
+        integerList.add(2, VALUE_51);
+        integerList.add(2, VALUE_45);
+        integerList.add(2, VALUE_51);
+        integerList.add(2, VALUE_90);
+        System.out.println("Arrays.toString(integerList.toArray()) = " + Arrays.toString(integerList.toArray()));
+
+        assertThat(integerList.contains(VALUE_4))
                 .isTrue();
 
         assertThat(integerList.contains(VALUE_NON_ELEMENT))
+                .isFalse();
+
+        assertThat(integerList.contains(VALUE_72))
                 .isFalse();
     }
 
@@ -159,6 +171,16 @@ public class IntegerListImplTest {
         integerList.clear();
         assertThat(integerList.isEmpty())
                 .isTrue();
+    }
+
+    @Test
+    public void bubbleSort() {
+        integerList.add(0, VALUE_5);
+        integerList.add(2, VALUE_4);
+        int[] actual = new int[] {1, 2, 3, 4, 5, 5};
+        assertThat(integerList.toArray().equals(actual));
+        System.out.println("integerList.toArray() = " + integerList.toArray());
+        System.out.println("actual = " + actual);
     }
 
 

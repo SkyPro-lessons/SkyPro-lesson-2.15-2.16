@@ -7,6 +7,11 @@ public class IntegerListImplConstants {
     public static final Integer VALUE_3 = 3;
     public static final Integer VALUE_4 = 4;
     public static final Integer VALUE_5 = 5;
+    public static final Integer VALUE_45 = 45;
+    public static final Integer VALUE_51 = 51;
+    public static final Integer VALUE_72 = 72;
+    public static final Integer VALUE_84 = 84;
+    public static final Integer VALUE_90 = 90;
 
     public static final Integer VALUE_NULL = null;
     public static final Integer VALUE_NEGATIVE = -700;

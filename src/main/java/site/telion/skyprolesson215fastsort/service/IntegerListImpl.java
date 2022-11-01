@@ -3,6 +3,7 @@ package site.telion.skyprolesson215fastsort.service;
 import site.telion.skyprolesson215fastsort.exception.MyIndexOutOfBoundsException;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Random;
 
 public class IntegerListImpl implements IntegerList {
@@ -11,7 +12,7 @@ public class IntegerListImpl implements IntegerList {
     private int arraySize;
 
     public IntegerListImpl() {
-        array = new Integer[10];
+        array = new Integer[4];
         arraySize = 0;
     }
 
@@ -107,7 +108,7 @@ public class IntegerListImpl implements IntegerList {
 
     @Override
     public int lastIndexOf(Integer item) {
-        for (int i = arraySize-1; i >= 0; i--) {
+        for (int i = arraySize - 1; i >= 0; i--) {
             if (array[i].equals(item)) {
                 return i;
             }
@@ -277,5 +278,4 @@ public class IntegerListImpl implements IntegerList {
         }
         return -1;
     }
-
 }
