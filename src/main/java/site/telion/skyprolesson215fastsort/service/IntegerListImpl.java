@@ -95,9 +95,12 @@ public class IntegerListImpl implements IntegerList {
 
     @Override
     public boolean contains(Integer item) {
-        array = Sorts.runSort(getArray());
+        Integer[] tempArray = array.clone();
+
+        tempArray = Sorts.runSort(getArray());
+        System.out.println(Arrays.toString(tempArray));
         System.out.println(Arrays.toString(array));
-        return !binarySearch(array, item).equals(-1);
+        return !binarySearch(tempArray, item).equals(-1);
     }
 
     @Override

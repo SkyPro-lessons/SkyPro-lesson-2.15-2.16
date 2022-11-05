@@ -1,5 +1,6 @@
 package site.telion.skyprolesson215fastsort.service;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import site.telion.skyprolesson215fastsort.exception.MyIndexOutOfBoundsException;
@@ -13,11 +14,16 @@ public class IntegerListImplTest {
     private final IntegerList integerList = new IntegerListImpl();
 
     @BeforeEach
-    public void addElements() {
+    public void beforeEach() {
         integerList.add(VALUE_1);
         integerList.add(VALUE_2);
         integerList.add(VALUE_3);
         integerList.add(VALUE_4);
+    }
+
+    @AfterEach
+    public void afterEach() {
+        integerList.clear();
     }
 
     @Test
