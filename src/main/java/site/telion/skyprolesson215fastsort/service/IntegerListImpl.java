@@ -3,7 +3,6 @@ package site.telion.skyprolesson215fastsort.service;
 import site.telion.skyprolesson215fastsort.exception.MyIndexOutOfBoundsException;
 
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Random;
 
 public class IntegerListImpl implements IntegerList {
@@ -12,17 +11,23 @@ public class IntegerListImpl implements IntegerList {
     private int arraySize;
 
     public IntegerListImpl() {
-        array = new Integer[4];
+        array = new Integer[10];
         arraySize = 0;
     }
 
     @Override
     public Integer add(Integer item) {
         validateItem(item);
-        increaseArraySize();
+        if (isArrayFull()) {
+            grow();
+        }
         array[arraySize] = item;
 
         return array[arraySize++];
+    }
+
+    private boolean isArrayFull() {
+        return arraySize == (array.length - 1);
     }
 
     @Override
@@ -32,7 +37,9 @@ public class IntegerListImpl implements IntegerList {
         if (index < 0 || index > arraySize) {
             throw new MyIndexOutOfBoundsException("Введен некорректный индекс");
         }
-        increaseArraySize();
+        if (isArrayFull()) {
+            grow();
+        }
 
         if (arraySize - index >= 0) {
             System.arraycopy(array, index, array, index + 1, arraySize - index);
@@ -49,11 +56,9 @@ public class IntegerListImpl implements IntegerList {
         }
     }
 
-    private void increaseArraySize() {
-        if (arraySize == (array.length - 1)) {
-            int newSize = array.length * 2 + 1;
-            array = Arrays.copyOf(array, newSize);
-        }
+    private void grow() {
+        int newSize = (int) (array.length * 1.5) + 1;
+        array = Arrays.copyOf(array, newSize);
     }
 
     @Override
@@ -90,10 +95,12 @@ public class IntegerListImpl implements IntegerList {
 
     @Override
     public boolean contains(Integer item) {
-        array = selectionSort(getArray());
+        Integer[] tempArray = array.clone();
+
+        tempArray = Sorts.runSort(getArray());
+        System.out.println(Arrays.toString(tempArray));
         System.out.println(Arrays.toString(array));
-        return !binarySearch(array, item).equals(-1);
-        //return indexOf(item) != -1;
+        return !binarySearch(tempArray, item).equals(-1);
     }
 
     @Override
@@ -108,7 +115,7 @@ public class IntegerListImpl implements IntegerList {
 
     @Override
     public int lastIndexOf(Integer item) {
-        for (int i = arraySize - 1; i >= 0; i--) {
+        for (int i = arraySize-1; i >= 0; i--) {
             if (array[i].equals(item)) {
                 return i;
             }
@@ -172,86 +179,6 @@ public class IntegerListImpl implements IntegerList {
         }
     }
 
-    // пузырек
-    private Integer[] bubbleSort(Integer[] array) {
-        for (int i = 0; i < array.length - 1; i++) {
-            for (int j = i + 1; j < array.length; j++) {
-                int temp;
-                if (array[j] < array[i]) {
-                    temp = array[i];
-                    array[i] = array[j];
-                    array[j] = temp;
-                }
-            }
-        }
-//        System.out.println(Arrays.toString(array));
-        return array;
-    }
-
-    // выбором
-    private Integer[] selectionSort(Integer[] array) {
-        for (int i = 0; i < array.length - 1; i++) {
-            int min = array[i];
-            int indexMin = i;
-            int temp;
-            for (int j = i + 1; j < array.length; j++) {
-                if (array[j] < min) {
-                    min = array[j];
-                    indexMin = j;
-                }
-            }
-            temp = array[i];
-            array[i] = array[indexMin];
-            array[indexMin] = temp;
-        }
-
-//        System.out.println(Arrays.toString(array));
-        return array;
-    }
-
-    // вставками
-    private Integer[] insertionSort(Integer[] array) {
-        for (int i = 1; i < array.length; i++) {
-            int temp;
-            int currIndex = i;
-            for (int j = i - 1; j >= 0; j--) {
-                if (array[currIndex] < array[j]) {
-                    temp = array[currIndex];
-                    array[currIndex] = array[j];
-                    array[j] = temp;
-                    currIndex--;
-                } else {
-                    break;
-                }
-            }
-        }
-
-        System.out.println(Arrays.toString(array));
-        return array;
-    }
-
-    public void sortTest() {
-        Integer[] array = new Integer[100_00];
-        Random random = new Random();
-
-        for (int i = 0; i < array.length; i++) {
-            array[i] = random.nextInt(50_000);
-        }
-
-        long start = System.currentTimeMillis();
-        this.bubbleSort(array.clone());
-        System.out.println("Bubble sort: " + ((System.currentTimeMillis() - start) / 1000.0) + " s");
-
-        start = System.currentTimeMillis();
-        this.selectionSort(array.clone());
-        System.out.println("Selection sort: " + ((System.currentTimeMillis() - start) / 1000.0) + " s");
-
-        start = System.currentTimeMillis();
-        this.insertionSort(array.clone());
-        System.out.println("Insertion sort: " + ((System.currentTimeMillis() - start) / 1000.0) + " s");
-
-    }
-
     private Integer binarySearch(Integer[] array, Integer value) {
         int low = 0;
         int high = array.length - 1;
@@ -278,4 +205,5 @@ public class IntegerListImpl implements IntegerList {
         }
         return -1;
     }
+
 }

@@ -1,10 +1,9 @@
 package site.telion.skyprolesson215fastsort.service;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import site.telion.skyprolesson215fastsort.exception.MyIndexOutOfBoundsException;
-
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -15,11 +14,16 @@ public class IntegerListImplTest {
     private final IntegerList integerList = new IntegerListImpl();
 
     @BeforeEach
-    public void addElements() {
+    public void beforeEach() {
         integerList.add(VALUE_1);
         integerList.add(VALUE_2);
         integerList.add(VALUE_3);
         integerList.add(VALUE_4);
+    }
+
+    @AfterEach
+    public void afterEach() {
+        integerList.clear();
     }
 
     @Test
@@ -106,21 +110,26 @@ public class IntegerListImplTest {
 
     @Test
     public void containsValueInArray() {
-        integerList.add(0, VALUE_84);
-        integerList.add(2, VALUE_51);
-        integerList.add(2, VALUE_45);
-        integerList.add(2, VALUE_51);
-        integerList.add(2, VALUE_90);
-        System.out.println("Arrays.toString(integerList.toArray()) = " + Arrays.toString(integerList.toArray()));
+        integerList.add(VALUE_12);
+        integerList.add(VALUE_42);
+        integerList.add(VALUE_15);
+        integerList.add(VALUE_31);
 
-        assertThat(integerList.contains(VALUE_4))
+        assertThat(integerList.contains(VALUE_31))
                 .isTrue();
+
+        assertThat(integerList.contains(VALUE_3))
+                .isTrue();
+
+        assertThat(integerList.contains(VALUE_NEGATIVE))
+                .isFalse();
 
         assertThat(integerList.contains(VALUE_NON_ELEMENT))
                 .isFalse();
 
-        assertThat(integerList.contains(VALUE_72))
-                .isFalse();
+        integerList.clear();
+
+
     }
 
     @Test
@@ -165,22 +174,40 @@ public class IntegerListImplTest {
     }
 
     @Test
+    public void bigSizeArray() {
+        integerList.add(VALUE_3);
+        integerList.add(VALUE_5);
+        integerList.add(VALUE_3);
+        integerList.add(VALUE_1);
+        integerList.add(VALUE_3);
+        integerList.add(VALUE_1);
+
+
+        assertThat(integerList.size())
+                .isEqualTo(10);
+    }
+
+    @Test
+    public void bigSizeArrayInsert() {
+        integerList.add(VALUE_3, 0);
+        integerList.add(VALUE_5, 2);
+        integerList.add(VALUE_3, 1);
+        integerList.add(VALUE_1, 3);
+        integerList.add(VALUE_3, 3);
+        integerList.add(VALUE_1, 0);
+
+
+        assertThat(integerList.size())
+                .isEqualTo(10);
+    }
+
+    @Test
     public void isEmptyAndClearArray() {
         assertThat(integerList.isEmpty())
                 .isFalse();
         integerList.clear();
         assertThat(integerList.isEmpty())
                 .isTrue();
-    }
-
-    @Test
-    public void bubbleSort() {
-        integerList.add(0, VALUE_5);
-        integerList.add(2, VALUE_4);
-        int[] actual = new int[] {1, 2, 3, 4, 5, 5};
-        assertThat(integerList.toArray().equals(actual));
-        System.out.println("integerList.toArray() = " + integerList.toArray());
-        System.out.println("actual = " + actual);
     }
 
 
